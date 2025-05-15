@@ -10,5 +10,5 @@
     </title>
 </head>
 
-<body>
-    <div class="min-h-full"></div>
+<body class="dark:bg-gray-900 dark:text-white">
+    <div class="h-full"></div>

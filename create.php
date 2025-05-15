@@ -1,31 +1,12 @@
 <?php
+
+session_start();
+if (!isset($_SESSION['user'])) {
+    header('Location: login.php');
+    exit();
+}
 require 'models/produits-data.php';
 
-
-// if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-//     $nom = $_POST['nom'];
-//     $prix = $_POST['prix'];
-//     $devise = $_POST['devise'];
-//     $etudiant_id = $_POST['etudiant_id'];
-
-//     $image_name = $_FILES['image']['name'];
-//     $image_tmp_name = $_FILES['image']['tmp_name'];
-
-
-//     //Deplacer l'image dans le dossier uploads
-//     move_uploaded_file($image_tmp_name, "uploads/". $image_name);
-//     //Enregistrer les infos du produit dans la base de données
-//     $db->query("INSERT INTO produits (nom, prix, devise, etudiant_id, image) VALUES (:nom, :prix, :devise, :etudiant_id, :image)", [
-//         'nom' => $nom,
-//         'prix' => $prix,
-//         'devise' => $devise,
-//         'etudiant_id' => $etudiant_id,
-//         'image' => $image_name
-//     ]);
-//     //var_dump($nom, $prix, $devise, $etudiant_id, $image_name, $image_tmp_name);
-
-
-// }
 
 $success = false;
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -45,15 +26,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $image_name = null; // Aucun fichier téléchargé
     }
 
-    // Enregistrer les infos du produit dans la base de données
-    $db->query("INSERT INTO produits (nom, prix, devise, etudiant_id, image) 
-                VALUES (:nom, :prix, :devise, :etudiant_id, :image)", [
-        'nom' => $nom,
-        'prix' => $prix,
-        'devise' => $devise,
-        'etudiant_id' => $etudiant_id,
-        'image' => $image_name
-    ]);
 
     $success = true;
 }
@@ -70,7 +42,7 @@ $header = 'Ajouter un nouveau produit';
 <?php require 'composants/main.php'; ?>
 
 
-<div>
+<div class="h-screen">
 
     <form class="max-w-sm mx-auto" action="create.php" method="POST" enctype="multipart/form-data">
         <?php if ($success): ?>
