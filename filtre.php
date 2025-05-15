@@ -1,5 +1,5 @@
 <?php
-
+session_start();
 require 'models/EtudiantModel.php';
 require 'models/Database.php';
 require 'models/ProduitModel.php';

@@ -4,6 +4,12 @@ $page = "Login.php";
 $title = 'Login';
 $header = 'Connexion';
 
+session_start();
+if ($_SESSION['user'] ?? false) {
+    header('Location: create.php');
+    exit();
+}
+
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $email = $_POST['email'];
     $password = $_POST['password'];
@@ -18,7 +24,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
         //demarrer une session 
 
-        session_start();
         //creer une seession 
 
         $_SESSION['user'] = [
@@ -26,8 +31,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             "email" => $user["email"]
         ];
 
+        session_regenerate_id(true); // Regenerate session ID to prevent session fixation attacks
         //redirection 
         header('Location: create.php');
+        exit();
     } else {
 
         $error = "echec de connexion";

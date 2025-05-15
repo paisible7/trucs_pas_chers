@@ -1,4 +1,5 @@
 <?php
+session_start();
 $header = 'Bienvenue sur TrucPascher';
 $title = 'Accueil';
 $page = 'index.php' ?>

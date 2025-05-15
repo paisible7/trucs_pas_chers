@@ -23,9 +23,12 @@ $default = $same . " text-gray-300 hover:bg-gray-700 hover:text-white";
                         <a href="filtre.php" class="<?php echo ($page === 'Filtre.php') ? $current : $default ?>" aria-current="page">
                             Filtre
                         </a>
-                        <a href="create.php" class="<?php echo ($page === 'Create.php') ? $current : $default ?>">
-                            Nouveau Produit
-                        </a>
+                        <?php if ($_SESSION['user'] ?? false): ?>
+                            <a href="create.php" class="<?php echo ($page === 'Create.php') ? $current : $default ?>">
+                                Nouveau Produit
+                            </a>                           
+                        <?php endif; ?>
+
                         <a href="produits.php" class="<?php echo ($page === 'Produits.php') ? $current : $default ?>">
                             Produits
                         </a>
@@ -38,7 +41,9 @@ $default = $same . " text-gray-300 hover:bg-gray-700 hover:text-white";
                     </div>
                 </div>
             </div>
-            <div class="hidden md:block">
+            <?php if (!$_SESSION['user'] ?? false): ?>
+              
+            <div class=" md:block">
                 <div class="ml-4 flex items-center md:ml-6">
                     <button type="button" class="relative rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800 focus:outline-hidden">
                         <span class="absolute -inset-1.5"></span>
@@ -127,5 +132,6 @@ $default = $same . " text-gray-300 hover:bg-gray-700 hover:text-white";
                 <a href="#" class="block rounded-md px-3 py-2 text-base font-medium text-gray-400 hover:bg-gray-700 hover:text-white">Sign out</a>
             </div>
         </div>
-    </div>
+    </div> 
+    <?php endif; ?>
 </nav>

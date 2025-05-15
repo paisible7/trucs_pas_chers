@@ -1,4 +1,7 @@
 <?php
+
+session_start();
+
 $page = "Contact.php";
 $title = 'Contact';
 $header = 'Contactez-nous';

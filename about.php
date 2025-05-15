@@ -1,4 +1,6 @@
 <?php
+
+session_start();
 $page = "About.php";
 $title = 'About';
 $header = 'A propos de nous';

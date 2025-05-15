@@ -1,4 +1,6 @@
 <?php
+
+session_start();
 $header = 'Tous nos produits';
 $title = 'Produits';
 $page = 'produits.php'
