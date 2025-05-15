@@ -36,4 +36,15 @@ class EtudiantModel
             ]
         ];
     }
+
+    public function find($etudiant_id)
+    {
+        $etudiant = null;
+        foreach ($this->all() as $etudiant) {
+            if ($etudiant['id'] == $etudiant_id) {
+                return $etudiant;
+            }
+        }
+        return null;
+    }
 }
