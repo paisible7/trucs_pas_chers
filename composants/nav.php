@@ -14,7 +14,7 @@ $default = $same . " text-gray-300 hover:bg-gray-700 hover:text-white";
                 <div class="shrink-0">
                     <img class="size-8" src="https://tailwindcss.com/plus-assets/img/logos/mark.svg?color=indigo&shade=500" alt="Your Company">
                 </div>
-                <div class="hidden md:block">
+                <div class="md:block">
                     <div class="ml-10 flex items-baseline space-x-4">
                         <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
                         <a href="index.php" class="<?php echo ($page === 'Index.php') ? $current : $default ?>" aria-current="page">
@@ -54,7 +54,7 @@ $default = $same . " text-gray-300 hover:bg-gray-700 hover:text-white";
                     </button>
 
                     <!-- Profile dropdown -->
-                    <div class="relative ml-3">
+                    <div class="hidden relative ml-3">
                         <div>
                             <button type="button" class="relative flex max-w-xs items-center rounded-full bg-gray-800 text-sm focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800 focus:outline-hidden" id="user-menu-button" aria-expanded="false" aria-haspopup="true">
                                 <span class="absolute -inset-1.5"></span>
@@ -79,10 +79,13 @@ $default = $same . " text-gray-300 hover:bg-gray-700 hover:text-white";
                             <a href="#" class="block px-4 py-2 text-sm text-gray-700" role="menuitem" tabindex="-1" id="user-menu-item-1">Settings</a>
                             <a href="#" class="block px-4 py-2 text-sm text-gray-700" role="menuitem" tabindex="-1" id="user-menu-item-2">Sign out</a>
                         </div>
+
+                        
                     </div>
                 </div>
+                
             </div>
-            <div class="-mr-2 flex md:hidden">
+            <div class="bg-red-600 mr-2 md:hidden">
                 <!-- Mobile menu button -->
                 <button type="button" class="relative inline-flex items-center justify-center rounded-md bg-gray-800 p-2 text-gray-400 hover:bg-gray-700 hover:text-white focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800 focus:outline-hidden" aria-controls="mobile-menu" aria-expanded="false">
                     <span class="absolute -inset-0.5"></span>
@@ -101,7 +104,7 @@ $default = $same . " text-gray-300 hover:bg-gray-700 hover:text-white";
     </div>
 
     <!-- Mobile menu, show/hide based on menu state. -->
-    <div class="md:hidden" id="mobile-menu">
+    <div class="hidden md:hidden" id="mobile-menu">
         <div class="space-y-1 px-2 pt-2 pb-3 sm:px-3">
             <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
             <a href="#" class="block rounded-md bg-gray-900 px-3 py-2 text-base font-medium text-white" aria-current="page">Dashboard</a>
