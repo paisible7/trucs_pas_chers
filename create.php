@@ -7,7 +7,6 @@ if (!isset($_SESSION['user'])) {
 }
 require 'models/produits-data.php';
 
-
 $success = false;
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $nom = $_POST['nom'] ?? null;
@@ -22,14 +21,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         // Déplacer l'image dans le dossier uploads
         move_uploaded_file($image_tmp_name, 'upload/' . $image_name);
+        
+        // Créer le produit dans la base de données
+        try {
+            $produitModel->create($nom, $prix, $devise, $etudiant_id, $image_name);
+            $success = true;
+        } catch (Exception $e) {
+            $error = "Erreur lors de l'ajout du produit : " . $e->getMessage();
+        }
     } else {
-        $image_name = null; // Aucun fichier téléchargé
+        $error = "Veuillez sélectionner une image";
     }
-
-
-    $success = true;
 }
-
 
 $page = "Create.php";
 $title = 'Nouveau produit';
@@ -41,15 +44,19 @@ $header = 'Ajouter un nouveau produit';
 <?php require 'composants/header.php'; ?>
 <?php require 'composants/main.php'; ?>
 
-
 <div class="h-screen">
-
     <form class="max-w-sm mx-auto" action="create.php" method="POST" enctype="multipart/form-data">
         <?php if ($success): ?>
             <div class="p-4 mb-4 text-sm text-green-800 rounded-lg bg-green-50 dark:bg-gray-800">
                 Le produit <span class="font-medium">
                     <?php echo $nom ?>
-                </span> a été ajouté
+                </span> a été ajouté avec succès
+            </div>
+        <?php endif; ?>
+        
+        <?php if (isset($error)): ?>
+            <div class="p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800">
+                <?php echo $error ?>
             </div>
         <?php endif; ?>
         <div class="mb-5">
