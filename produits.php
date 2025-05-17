@@ -1,7 +1,7 @@
 <?php
 
 session_start();
-$header = 'Tous nos produits';
+$header = 'Tous les produits';
 $title = 'Produits';
 $page = 'produits.php'
 ?>
@@ -11,7 +11,6 @@ $page = 'produits.php'
 <?php require 'composants/main.php' ?>
 <?php require 'models/produits-data.php' ?>
 <div class="px-24 py-4">
-    <h1 class="mb-4 text-3xl font-extrabold text-gray-900 md:text-5xl lg:text-6xl">Tous les <span class="text-transparent bg-clip-text bg-gradient-to-r to-emerald-600 from-sky-400">Produits</span></h1>
     <div class="grid grid-cols-3 gap-4">
 
         <?php foreach ($produits as $produit): ?>

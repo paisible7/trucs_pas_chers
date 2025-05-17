@@ -1,9 +1,26 @@
 <?php
+// Activation de l'affichage des erreurs
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+
 session_start();
 require 'models/EtudiantModel.php';
 require 'models/Database.php';
 require 'models/ProduitModel.php';
 
+// Test de connexion à la base de données
+try {
+    $config = require 'config.php';
+    $db = new PDO(
+        "mysql:host={$config['database']['host']};dbname={$config['database']['dbname']};charset=utf8",
+        $config['database']['user'],
+        $config['database']['password']
+    );
+    echo "<!-- Connexion à la base de données réussie -->";
+} catch (PDOException $e) {
+    die("Erreur de connexion à la base de données : " . $e->getMessage());
+}
 
 $etudiantModel = new EtudiantModel();
 $etudiants = $etudiantModel->all();
@@ -37,23 +54,21 @@ $produits = $produitModel->filterByEtudiantId($etudiant_id);
 
     <?php foreach ($etudiants as $etudiant): ?>
         <?php if ($etudiant['id'] == $etudiant_id): ?>
-            <span class="bg-gray-100 text-gray-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full dark:bg-gray-700 dark:text-gray-300 border border-blue-400">
+            <span class="bg-gray-100 text-gray-800 text-sm font-medium px-4 py-2 rounded-sm dark:bg-gray-700 m-2 dark:text-gray-300">
                 <?php echo $etudiant['nom']; ?>
             </span>
         <?php else : ?>
             <a href="filtre.php?etudiant_id=<?php echo $etudiant['id'] ?>"
-                class="bg-blue-100 hover:bg-blue-200 text-blue-800 text-sm font-medium me-2 px-2.5 py-0.5 rounded-sm dark:bg-gray-700 dark:text-blue-400 border border-blue-400 inline-flex items-center justify-center">
+                class="bg-blue-100 hover:bg-blue-200 text-blue-800 text-sm font-medium px-4 py-2 rounded-sm dark:bg-gray-700 dark:text-blue-400 m-2 items-center justify-center">
                 <?php echo $etudiant['nom']; ?>
             </a>
         <?php endif; ?>
     <?php endforeach; ?>
 </div>
 
-<div class="grid grid-cols-4 gap-1 items-center justify-center w-full">
+<div class="grid grid-cols-5 gap-1 w-full">
     <?php foreach ($produits as $produit): ?>
 
-
-        lex flex-colbbb
         <div class="w-full max-w-sm bg-white border border-gray-200 rounded-lg shadow-sm dark:bg-gray-800 dark:border-gray-700">
             <a href="#">
                 <img class="p-8 rounded-t-lg w-full h-72 object-cover" src="<?php echo 'upload/' . $produit['image'] ?>" alt="product image" />

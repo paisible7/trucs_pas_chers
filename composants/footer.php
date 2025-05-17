@@ -1,6 +1,6 @@
 </div>
   </main>
-</div>
+<!-- div du head -->
 </div>
 </body>
 

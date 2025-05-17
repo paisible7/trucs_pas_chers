@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html class="h-full bg-gray-100">
+<html>
 
 <head>
     <meta charset="UTF-8">
@@ -10,5 +10,5 @@
     </title>
 </head>
 
-<body class="dark:bg-gray-900 dark:text-white">
-    <div class="h-full"></div>
+<body>
+    <div class="w-full">
